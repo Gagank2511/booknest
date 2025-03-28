@@ -26,5 +26,6 @@
             <button type="submit">Add Book</button>
 
         </form>
+        <?php include "../app/views/components/footer.php"; ?>
 </body>
 </html>
