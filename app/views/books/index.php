@@ -14,5 +14,7 @@
             </li>
         <?php endforeach; ?>
     </ul>
+    <?php include "../app/views/components/footer.php"; ?>
 </body>
+
 </html>
