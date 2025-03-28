@@ -16,5 +16,6 @@
         <?php endforeach; ?>
     </ul>
     <a href="admin/addBook">Add New Book</a>
+    <?php include "../app/views/components/footer.php"; ?>
 </body>
 </html>
