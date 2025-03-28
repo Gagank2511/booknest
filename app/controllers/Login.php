@@ -25,6 +25,8 @@ class Login extends Controller
             } else {
                 $this->view('auth/login', ['error' => 'Invalid email or password']);
             }
+        } else {
+            header("Location: /login");
         }
     }
 
@@ -32,6 +34,6 @@ class Login extends Controller
     {
         session_destroy();
         header('Location: /login');
-        exit;
+        exit();
     }
 }
