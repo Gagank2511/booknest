@@ -17,6 +17,12 @@ class BookCollection extends Model {
         $stmt->execute(['title' => $title, 'author' => $author, 'description' => $description, 'price' => $price]);
     }
 
+    public function searchBooks($searchTerm): array {
+        $stmt = $this->db->prepare("SELECT * FROM books WhERE title LIKE :search OR author LIKE :search");
+        $stmt->execute(['search' => '%' . $searchTerm . '%']);
+        return $stmt->fetchAll();
+    }
+
     public function deleteBook($id){
         $stmt = $this->db->prepare("DELETE FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
