@@ -8,6 +8,8 @@
 </head>
 
 <body>
+<?php include "../app/views/components/header.php"; ?>
+
     <h2>Register</h2>
 
     <?php if (!empty($data['error'])): ?>
