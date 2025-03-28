@@ -1,7 +1,7 @@
 <?php
 class Admin extends Controller{
     public function manageBooks(){
-        $bookModel = $this->model('Book');
+        $bookModel = $this->model('BookCollection');
         $books = $bookModel->getAllBooks();
         $this->view('admin/manage_books', ['books' => $books]);
     }
