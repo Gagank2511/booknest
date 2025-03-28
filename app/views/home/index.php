@@ -10,5 +10,5 @@
 <body>
     <h1>Welcome to Home Page!</h1>
 </body>
-
+    <?php include "../app/views/components/footer.php"; ?>
 </html>
