@@ -6,6 +6,8 @@
     <title>Add Book</title>
 </head>
 <body>
+    <?php include "../app/views/components/header.php"; ?>
+
     <h1>Add New Book</h1>
     <?php if(!empty($data['error'])): ?>
         <p style="color: red;"><?= htmlspecialchars($data['error']) ?></p>

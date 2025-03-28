@@ -6,6 +6,8 @@
     <title>Manage Books</title>
 </head>
 <body>
+<?php include "../app/views/components/header.php"; ?>
+
     <h1>Manage Books</h1>
     <ul>
         <?php foreach ($data['books'] as $book): ?>
