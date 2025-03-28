@@ -31,6 +31,7 @@
     </form>
 
     <p>Already have an account? <a href="/login">Login here</a></p>
+    <?php include "../app/views/components/footer.php"; ?>
 </body>
 
 </html>
