@@ -23,6 +23,7 @@
 
         <button type="submit">Login</button>
     </form>
+    <?php include "../app/views/components/footer.php"; ?>
 </body>
 
 </html>
