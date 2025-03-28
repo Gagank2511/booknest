@@ -8,6 +8,8 @@
 </head>
 
 <body>
+<?php include "../app/views/components/header.php"; ?>
+
     <?php if (sizeof($data['books']) == 0) : ?>
         There are no books to show
 
