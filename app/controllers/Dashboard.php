@@ -8,7 +8,9 @@ class Dashboard extends Controller
             header('Location: /login');
             exit;
         }
+        //Sanitise user input to prevent XSS
+        $userName = htmlspecialchars($_SESSION['user_name'], ENT_QUOTES, 'UTF-8');
 
-        $this->view('dashboard/index', ['user' => $_SESSION['user_name']]);
+        $this->view('dashboard/index', ['user' => $userName]);
     }
 }
