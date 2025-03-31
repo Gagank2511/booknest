@@ -14,10 +14,16 @@ class Login extends Controller
             $email = trim($_POST['email']);
             $password = trim($_POST['password']);
 
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->view('auth/login', ['error' => 'Invalid email format']);
+                return;
+            }
+
             $userModel = $this->model('User');
             $user = $userModel->login($email, $password);
 
-            if ($user) {
+            if ($user && password_verify($password, $user['password'])) {
+                session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
                 header('Location: /dashboard'); // Redirect to the members area
