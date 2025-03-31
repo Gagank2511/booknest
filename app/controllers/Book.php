@@ -15,7 +15,13 @@ class Book extends Controller {
 
     public function show( $id ) {
         $bookModel = $this->model( 'BookCollection' );
-        $books = $bookModel->getAllBooks();
-        $this->view( 'books/show', [ 'books' => $books ] );
+        $book = $bookModel->getBookById($id); // Retrieve a specific book by ID
+
+        if ($book) {
+            $this->view( 'books/show', [ 'book' => $book ] ); // Pass the specific book to the view
+        } else {
+            // Handle the case where the book is not found
+            $this->view( 'books/not_found', [ 'message' => 'Book not found' ] );
+        }
     }
 }
