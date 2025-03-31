@@ -1,8 +1,19 @@
 <?php
 class Admin extends Controller{
+    protected $bookModel;
+
+    public function __construct()
+    {
+        $this->bookModel = $this->model('BookCollection');
+
+        if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin'){
+            header("Location: /auth/login");
+            exit;
+        }
+    }
+
     public function manageBooks(){
-        $bookModel = $this->model('BookCollection');
-        $books = $bookModel->getAllBooks();
+        $books = $this->bookModel->getAllBooks();
         $this->view('admin/manage_books', ['books' => $books]);
     }
 
@@ -18,8 +29,7 @@ class Admin extends Controller{
                 return;
             }
 
-            $bookModel = $this->model('Book');
-            $bookModel->addBook($title, $author, $description, $price);
+            $this->bookModel->addBook($title, $author, $description, $price);
             header("Location: /admin/manageBooks");
             exit;
         }
@@ -27,8 +37,7 @@ class Admin extends Controller{
     }
 
     public function deleteBook($id){
-        $bookModel = $this->model('model');
-        $bookModel->deleteBook($id);
+        $this->bookModel->deleteBook($id);
         header("Location: /admin/manageBooks");
         exit;
     }
