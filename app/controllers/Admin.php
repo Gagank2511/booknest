@@ -1,44 +1,69 @@
 <?php
-class Admin extends Controller{
+
+class Admin extends Controller
+ {
     protected $bookModel;
 
     public function __construct()
-    {
-        $this->bookModel = $this->model('BookCollection');
+ {
+        $this->bookModel = $this->model( 'BookCollection' );
 
-        if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin'){
-            header("Location: /auth/login");
-            exit;
+        if ( !$this->isAdmin() ) {
+            $this->redirectToLogin();
         }
     }
 
-    public function manageBooks(){
-        $books = $this->bookModel->getAllBooks();
-        $this->view('admin/manage_books', ['books' => $books]);
+    private function isAdmin(): bool
+ {
+        return isset( $_SESSION[ 'user_id' ] ) && $_SESSION[ 'user_role' ] === 'admin';
     }
 
-    public function addBook(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $title = trim($_POST['title']);
-            $author = trim($_POST['author']);
-            $description = trim($_POST['description']);
-            $price = floatval($_POST['price']);
+    private function redirectToLogin(): void
+ {
+        header( 'Location: /auth/login' );
+        exit;
+    }
 
-            if(empty($title) || empty($author) || empty($price)){
-                $this->view('admin/add_book', ['error' => 'All fields are required']);
+    public function manageBooks(): void
+ {
+        $books = $this->bookModel->getAllBooks();
+        $this->view( 'admin/manage_books', [ 'books' => $books ] );
+    }
+
+    public function addBook(): void
+ {
+        if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
+            $title = trim( $_POST[ 'title' ] );
+            $author = trim( $_POST[ 'author' ] );
+            $description = trim( $_POST[ 'description' ] );
+            $price = floatval( $_POST[ 'price' ] );
+
+            if ( $this->isInvalidBookData( $title, $author, $price ) ) {
+                $this->view( 'admin/add_book', [ 'error' => 'All fields are required' ] );
                 return;
             }
 
-            $this->bookModel->addBook($title, $author, $description, $price);
-            header("Location: /admin/manageBooks");
-            exit;
+            $this->bookModel->addBook( $title, $author, $description, $price );
+            $this->redirectToManageBooks();
+        } else {
+            $this->view( 'admin/add_book' );
         }
-        $this->view('admin/add_book');
     }
 
-    public function deleteBook($id){
-        $this->bookModel->deleteBook($id);
-        header("Location: /admin/manageBooks");
+    private function isInvalidBookData( string $title, string $author, float $price ): bool
+ {
+        return empty( $title ) || empty( $author ) || $price <= 0;
+    }
+
+    private function redirectToManageBooks(): void
+ {
+        header( 'Location: /admin/manageBooks' );
         exit;
+    }
+
+    public function deleteBook( int $id ): void
+ {
+        $this->bookModel->deleteBook( $id );
+        $this->redirectToManageBooks();
     }
 }
