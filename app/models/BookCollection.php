@@ -1,29 +1,30 @@
 <?php
 
 class BookCollection extends Model {
+    private const GET_ALL_BOOKS_QUERY = 'SELECT * FROM books';
     public function getAllBooks(): array {
-        $stmt = $this->db->query( 'SELECT * FROM books' );
-        return $stmt->fetchALl();
+        $stmt = $this->db->query( SELF:: GET_ALL_BOOKS_QUERY);
+        return $stmt->fetchALl(PDO::FETCH_ASSOC);
     }
 
-    public function getBookById( int $id ): mixed {
+    public function getBookById( int $id ): ?array {
         $stmt = $this->db->prepare("SELECT * FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
-        return $stmt->fetch();
+        return $stmt->fetch() ?: null;
     }
 
-    public function addBook($title, $author, $description, $price){
+    public function addBook(string $title, string $author, string $description, float $price): void{
         $stmt = $this->db->prepare("INSERT INTO books (title, author, description, price) VALUES (:title, :author, :description, :price)");
         $stmt->execute(['title' => $title, 'author' => $author, 'description' => $description, 'price' => $price]);
     }
 
-    public function searchBooks($searchTerm): array {
+    public function searchBooks(string $searchTerm): array {
         $stmt = $this->db->prepare("SELECT * FROM books WHERE title LIKE :search OR author LIKE :search");
         $stmt->execute(['search' => '%' . $searchTerm . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function deleteBook($id){
+    public function deleteBook(int $id): void{
         $stmt = $this->db->prepare("DELETE FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
     }
