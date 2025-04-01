@@ -22,7 +22,7 @@
         <?php else: ?>
             <?php foreach ($data['books'] as $book): ?>
                 <li>
-                    <a href="/books/show/<?= $book['id'] ?>"><?= htmlspecialchars($book['title']) ?></a> by <?= htmlspecialchars($book['author']) ?>
+                    <a href="/books/show/<?= $book['id'] ?>"><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8') ?></a> by <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8') ?>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>
