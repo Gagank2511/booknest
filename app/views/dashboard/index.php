@@ -11,7 +11,7 @@
 <body>
     <?php include "../app/views/components/header.php"; ?>
 
-    <h2>Welcome, <?= htmlspecialchars($data['user']) ?>!</h2>
+    <h2>Welcome, <?= htmlspecialchars($data['user'], ENT_QUOTES, 'UTF-8') ?>!</h2>
     <p>You are now logged in.</p>
     <a href="/login/logout">Logout</a>
     <?php include "../app/views/components/footer.php"; ?>
