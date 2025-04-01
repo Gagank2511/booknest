@@ -13,8 +13,8 @@
     <ul>
         <?php foreach ($data['books'] as $book): ?>
             <li>
-                <?= htmlspecialchars($book['title']) ?>
-                <a href="/admin/deleteBook/<?= $book['id'] ?>">Delete Book</a>
+                <?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8') ?>
+                <a href="/admin/deleteBook/<?= htmlspecialchars($book['id'], ENT_QUOTES, 'UTF-8') ?>">Delete Book</a>
             </li>
         <?php endforeach; ?>
     </ul>
