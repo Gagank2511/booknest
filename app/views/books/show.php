@@ -17,10 +17,10 @@
     <?php
         die();
     endif; ?>
-    <h1><?= htmlspecialchars($data['books']['title']) ?></h1>
-    <p>Author: <?= htmlspecialchars($data['books']['author']) ?></p>
-    <p>Description: <?= htmlspecialchars($data['books']['description']) ?></p>
-    <p>Price: $<?= htmlspecialchars($data['books']['price']) ?></p>
+    <h1><?= htmlspecialchars($data['books']['title'], ENT_QUOTES, 'UTF-8') ?></h1>
+    <p>Author: <?= htmlspecialchars($data['books']['author'], ENT_QUOTES, 'UTF-8') ?></p>
+    <p>Description: <?= htmlspecialchars($data['books']['description'], ENT_QUOTES, 'UTF-8') ?></p>
+    <p>Price: $<?= htmlspecialchars($data['books']['price'], ENT_QUOTES, 'UTF-8') ?></p>
 
     <h2>Leave a Review</h2>
     <form action="/reviews/add/<?= $data['books']['id'] ?>" method="POST">
@@ -37,8 +37,8 @@
     <ul>
         <?php foreach ($data['reviews'] as $review): ?>
             <li>
-                <strong><?= htmlspecialchars($review['rating']) ?> Stars</strong>
-                <p><?= htmlspecialchars($review['comment']) ?></p>
+                <strong><?= htmlspecialchars($review['rating'],ENT_QUOTES, 'UTF-8') ?> Stars</strong>
+                <p><?= htmlspecialchars($review['comment'], ENT_QUOTES, 'UTF-8') ?></p>
             </li>
         <?php endforeach; ?>
     </ul>
