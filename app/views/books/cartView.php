@@ -16,10 +16,10 @@
         <ul> 
             <?php foreach ($data['books'] as $items): ?>
                 <li>
-                    <strong><?= htmlspecialchars($items['book']['title']) ?></strong>
-                    <p>Author: <?= htmlspecialchars($items['book']['author']) ?></p>
-                    <p>Price: <?= htmlspecialchars($items['book']['price']) ?></p>
-                    <p>Quantity: <?= htmlspecialchars($items['book']['quantity']) ?></p>
+                    <strong><?= htmlspecialchars($items['book']['title'], ENT_QUOTES, 'UTF-8') ?></strong>
+                    <p>Author: <?= htmlspecialchars($items['book']['author'], ENT_QUOTES, 'UTF-8') ?></p>
+                    <p>Price: <?= htmlspecialchars($items['book']['price'], ENT_QUOTES, 'UTF-8') ?></p>
+                    <p>Quantity: <?= htmlspecialchars($items['book']['quantity'], ENT_QUOTES, 'UTF-8') ?></p>
                 </li>
             <?php endforeach; ?>
         </ul>
