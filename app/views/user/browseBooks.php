@@ -17,8 +17,8 @@
         <ul>
             <?php foreach ($data['books'] as $book): ?>
                 <li>
-                    <strong><?= htmlspecialchars($book['title']) ?></strong> by <?= htmlspecialchars($book['author']) ?>
-                    <p><?= htmlspecialchars($book['description']) ?></p>
+                    <strong><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8') ?></strong> by <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8') ?>
+                    <p><?= htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8') ?></p>
                     <p>Price: $<?= number_format($book['price'], 2) ?></p>
 
                 </li>
