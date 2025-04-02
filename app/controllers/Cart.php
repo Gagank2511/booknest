@@ -21,7 +21,7 @@ class Cart extends Controller {
             // Add new book to cart
             $_SESSION[ 'cart' ][ $bookId ] = $quantity;
         }
-        header("Location: /book/show/" . $_SESSION[ 'cart' ][ $bookId ]);
+        header("Location: /book/show/" . $bookId);
     }
 
     //get all the items in the carts
@@ -32,6 +32,7 @@ class Cart extends Controller {
 
     public function clearCart() {
         unset( $_SESSION[ 'cart' ] );
+        header("Location: /cart");
     }
 
     // Displaying the cart view
