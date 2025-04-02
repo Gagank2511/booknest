@@ -26,6 +26,7 @@ class Login extends Controller
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
+                $_SESSION['cart'] = [];
                 header('Location: /dashboard'); // Redirect to the members area
                 exit;
             } else {
