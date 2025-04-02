@@ -40,7 +40,7 @@ class User extends Model
     public function login( string $email, string $password )
  {
         $user = $this->findUserByEmail( $email );
-
+        
         if ( $user && password_verify( $password, $user[ 'password' ] ) ) {
             return $user;
         }
