@@ -10,7 +10,6 @@ class Book extends Controller {
     }
 
     public function show( $id ) {
-        var_dump($_SESSION);
         $bookModel = $this->model( 'BookCollection' );
         $book = $bookModel->getBookById( $id );
         $reviewModel = $this->model( 'Review' );
