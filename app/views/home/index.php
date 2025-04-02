@@ -9,10 +9,12 @@
 </head>
 
 <body>
-<?php include "../app/views/components/header.php"; ?>
-    <section class="container">
-        <h1>Welcome to Home Page!</h1>
-    </section>
+    <?php include "../app/views/components/header.php"; ?>
+    <main>
+        <section class="container">
+            <h1>Welcome to Home Page!</h1>
+        </section>
+    </main>
 </body>
     <?php include "../app/views/components/footer.php"; ?>
 </html>

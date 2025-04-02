@@ -9,24 +9,25 @@
 </head>
 
 <body>
-<?php include "../app/views/components/header.php"; ?>
-    
-    <h2>Login</h2>
+    <?php include "../app/views/components/header.php"; ?>
+    <main>
+        <h2>Login</h2>
 
-    <?php if (!empty($data['error'])): ?>
-        <p style="color: red;"><?= htmlspecialchars($data['error'], ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endif; ?>
+        <?php if (!empty($data['error'])): ?>
+            <p style="color: red;"><?= htmlspecialchars($data['error'], ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
 
-    <form action="/login/authenticate" method="POST">
-        <label>Email:</label>
-        <input type="email" name="email" id="email" required>
+        <form action="/login/authenticate" method="POST">
+            <label>Email:</label>
+            <input type="email" name="email" id="email" required>
 
-        <label>Password:</label>
-        <input type="password" name="password" id="password" required>
+            <label>Password:</label>
+            <input type="password" name="password" id="password" required>
 
-        <button type="submit">Login</button>
-    </form>
-    <?php include "../app/views/components/footer.php"; ?>
+            <button type="submit">Login</button>
+        </form>
+    </main>
 </body>
+    <?php include "../app/views/components/footer.php"; ?>
 
 </html>
