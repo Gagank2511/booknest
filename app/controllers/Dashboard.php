@@ -10,6 +10,8 @@ class Dashboard extends Controller
         //Sanitise user input to prevent XSS
         $userName = htmlspecialchars($_SESSION['user_name'], ENT_QUOTES, 'UTF-8');
 
-        $this->view('dashboard/index', ['user' => $userName]);
+        $bookModel = $this->model('BookCollection');
+        $books = $bookModel->getAllBooks();
+        $this->view('dashboard/index', ['user' => $userName, 'books' => $books]);
     }
 }
