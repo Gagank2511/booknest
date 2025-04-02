@@ -1,7 +1,7 @@
 <?php
 
 class Review extends Model {
-    public function addReview( int $userId, int $bookId, int $rating, string $comment ): void {
+    public function addReview( $userId, $bookId, $rating, $comment ) {
         // if ( !is_int( $userId ) || !is_int( $bookId ) || !is_numeric( $rating ) || !is_string( $comment ) ) {
         //     throw new InvalidArgumentException( 'Invalid input parameters' );
         // }
@@ -16,7 +16,7 @@ class Review extends Model {
         }
     }
 
-    public function getReviewsByBookId( int $bookId ) {
+    public function getReviewsByBookId( $bookId ) {
         try {
             $stmt = $this->db->prepare( 'SELECT * FROM reviews WHERE book_id = :book_id' );
             $stmt->execute( [ 'book_id' => $bookId ] );
