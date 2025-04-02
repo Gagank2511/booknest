@@ -7,7 +7,7 @@ class BookCollection extends Model {
         return $stmt->fetchALl(PDO::FETCH_ASSOC);
     }
 
-    public function getBookById( int $id ): ?array {
+    public function getBookById( $id ) {
         $stmt = $this->db->prepare("SELECT * FROM books WHERE id = :id");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch() ?: null;
