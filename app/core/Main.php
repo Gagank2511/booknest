@@ -28,13 +28,22 @@ class Main
         if ( isset( $url[ 1 ] ) && method_exists( $this->controller, $url[ 1 ] ) ) {
             $this->method = $url[ 1 ];
             unset( $url[ 1 ] );
+        } else {
+            if($this->controller instanceof Book && !isset($url[1])){
+                $this->method = 'index';
+            }
         }
 
-        // Set remaining URL segments as parameters
-        $this->params = $url ? array_values( $url ) : [];
+        if($this->controller instanceof Book && $this->method ==='./app/views/books/index' && !isset($_GET['search'])) {
+            $this->controller->search();
+        } else {
+            // Set remaining URL segments as parameters
+            $this->params = $url ? array_values( $url ) : [];
+    
+            // Call the method with parameters
+            call_user_func_array( [ $this->controller, $this->method ], $this->params );
+        }
 
-        // Call the method with parameters
-        call_user_func_array( [ $this->controller, $this->method ], $this->params );
     }
             
 
