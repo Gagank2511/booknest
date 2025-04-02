@@ -28,7 +28,7 @@
                 <?php endforeach; ?>
             </ul>
             <a href="/checkout">Proceed to Checkout</a>
-            <form action="/cart/clear" method="POST">
+            <form action="/cart/cart" method="POST">
                 <button type="submit">Clear Cart</button>
             </form>
         <?php endif; ?>
