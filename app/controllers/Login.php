@@ -11,7 +11,7 @@ class Login extends Controller
     public function authenticate()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = trim($_POST['email']);
+            $email = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
             $password = trim($_POST['password']);
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -21,8 +21,7 @@ class Login extends Controller
 
             $userModel = $this->model('User');
             $user = $userModel->login($email, $password);
-
-            if ($user && password_verify($password, $user['password'])) {
+            if ($user) {
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
