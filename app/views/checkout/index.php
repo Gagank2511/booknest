@@ -1,10 +1,10 @@
-// app/views/checkout/index.php
 <!DOCTYPE html>
 <html>
 <head>
     <title>Checkout</title>
 </head>
 <body>
+    <?php include "../app/views/components/header.php"; ?>
     <h1>Checkout</h1>
     <h2>Your Cart</h2>
     <ul>
@@ -30,5 +30,6 @@
         <br>
         <button type="submit">Confirm Order</button>
     </form>
+    <?php include "../app/views/components/footer.php"; ?>
 </body>
 </html>
