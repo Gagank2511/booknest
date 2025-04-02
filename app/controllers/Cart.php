@@ -3,14 +3,17 @@
 class Cart extends Controller {
 
     public function index() {
-        $this->viewCart(); 
+        $this->viewCart();
+
     }
-    public function addToCart(int $bookId, int $quantity ) {
+
+    public function addToCart() {
         // Starting the cart session if it is not already set
         if ( !isset ( $_SESSION[ 'cart' ] ) ) {
             $_SESSION[ 'cart' ] = [];
         }
-
+        $bookId = $_POST['bookId'];
+        $quantity = 1;
         // Update the quantity of the book if it is already set
         if ( isset( $_SESSION[ 'cart' ][ $bookId ] ) ) {
             $_SESSION[ 'cart' ][ $bookId ] += $quantity;
@@ -18,9 +21,11 @@ class Cart extends Controller {
             // Add new book to cart
             $_SESSION[ 'cart' ][ $bookId ] = $quantity;
         }
+        header("Location: /book/show/" . $_SESSION[ 'cart' ][ $bookId ]);
     }
 
     //get all the items in the carts
+
     public function getCartItems() {
         return $_SESSION[ 'cart' ] ?? [];
     }
@@ -30,24 +35,26 @@ class Cart extends Controller {
     }
 
     // Displaying the cart view
+
     public function viewCart() {
-        $bookModel = $this->model('BookCollection');
+        $bookModel = $this->model( 'BookCollection' );
         $cartItems = $this->getCartItems();
         $books = [];
 
         //Fetching book details for each item in the cart
-        foreach ($cartItems as $bookId => $quantity) {
-            $book = $bookModel->getBookById($bookId);
-            if($book) {
+        foreach ( $cartItems as $bookId => $quantity ) {
+            $book = $bookModel->getBookById( $bookId );
+            if ( $book ) {
                 $books[] = [
                     'book' => $book,
                     'quantity' => $quantity
                 ];
             }
         }
-        $this->view('cart/cart', ['books' => $books]);
+        $this->view( 'cart/cart', [ 'books' => $books ] );
     }
-    public function checkout(){
+
+    public function checkout() {
         $cart = new Cart();
         $cart->clearCart();
     }
