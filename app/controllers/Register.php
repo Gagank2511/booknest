@@ -10,20 +10,18 @@ class Register extends Controller
     public function store()
  {
         if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
-            if ( !isset( $_SESSION[ 'csrf_token' ] ) || !isset( $_POST[ 'csrf_token' ] ) || !hash_equals( $_SESSION[ 'csrf_token' ], $_POST[ 'csrf_token' ] ) ) {
-                $this->view( 'auth/register', [ 'error' => 'Invalid CSRF token' ] );
-                return;
-            }
             $name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
             $email = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
             $password = trim( $_POST [ 'password' ] );
             $confirmPassword = trim( $_POST[ 'confirm_password' ] );
-
+            
             $validationError = $this->validateRegistration( $name, $email, $password, $confirmPassword );
             if ( $validationError ) {
                 $this->view( 'auth/register', [ 'error' => $validationError ] );
                 return;
             }
+        }
+
 
             // // Basic validation
             // if ( empty( $name ) || empty( $email ) || empty( $password ) || empty( $confirmPassword ) ) {
@@ -47,24 +45,24 @@ class Register extends Controller
                 $this->view( 'auth/register', [ 'error' => 'Email already in use' ] );
             }
         }
+        private function validateRegistration( $name, $email, $password, $confirmPassword ) {
+            if ( empty( $name ) || empty( $email ) || empty( $password ) || empty( $confirmPassword ) ) {
+                return 'All fields are required';
+            }
+            if ( !filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+                return 'Invalid email format';
+            }
+            if ( $password != $confirmPassword ) {
+                return 'Passwords do not match';
+            }
+            if ( strlen( $password ) <8 ) {
+                return 'Password must be at least 8 characters long';
+            }
+            if ( !preg_match( '/[A-Z]/', $password ) || !preg_match( '/[a-z]/', $password ) || !preg_match( '/[0-9]/', $password ) || !preg_match( '/[\W]/', $password ) ) {
+                return 'Password must include uppercase, lowercase, number and special character';
+            }
+            return null;
     }
 
-    private function validateRegistration( $name, $email, $password, $confirmPassword ) {
-        if ( empty( $name ) || empty( $email ) || empty( $password ) || empty( $confirmPassword ) ) {
-            return 'All fields are required';
-        }
-        if ( !filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
-            return 'Invalid email format';
-        }
-        if ( $password != $confirmPassword ) {
-            return 'Passwords do not match';
-        }
-        if ( strlen( $password ) <8 ) {
-            return 'Password must be at least 8 characters long';
-        }
-        if ( !preg_match( '/[A-Z]/', $password ) || !preg_match( '/[a-z]/', $password ) || !preg_match( '/[0-9]/', $password ) || !preg_match( '/[\W]/', $password ) ) {
-            return 'Password must include uppercase, lowercase, number and special character';
-        }
-        return null;
-    }
 }
+
