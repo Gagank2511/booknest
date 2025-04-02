@@ -1,6 +1,10 @@
 <?php
 
 class Cart extends Controller {
+
+    public function index() {
+        $this->viewCart(); 
+    }
     public function addToCart(int $bookId, int $quantity ) {
         // Starting the cart session if it is not already set
         if ( !isset ( $_SESSION[ 'cart' ] ) ) {
@@ -41,7 +45,11 @@ class Cart extends Controller {
                 ];
             }
         }
-        $this->view('cart/view', ['books' => $books]);
+        $this->view('cart/cart', ['books' => $books]);
+    }
+    public function checkout(){
+        $cart = new Cart();
+        $cart->clearCart();
     }
 
 }
