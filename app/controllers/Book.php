@@ -8,7 +8,9 @@ class Book extends Controller {
     public function show($id){
         $bookModel = $this->model('BookCollection');
         $book = $bookModel->getBookById($id);
-        $this->view('book/show', ['book' => $book]);
+        $reviewModel = $this->model("Review");
+        $bookReview = $reviewModel->getReviewsByBookId($id);
+        $this->view('book/show', ['book' => $book, 'review'=>$bookReview]);
     }
 
     public function search() {
