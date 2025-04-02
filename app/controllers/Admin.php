@@ -24,7 +24,7 @@ class Admin extends Controller
         exit;
     }
 
-    public function manageBooks(): void
+    public function manageBooks()
  {
         $books = $this->bookModel->getAllBooks();
         $this->view( 'admin/manage_books', [ 'books' => $books ] );
