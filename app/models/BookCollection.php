@@ -19,8 +19,8 @@ class BookCollection extends Model {
     }
 
     public function searchBooks(string $searchTerm): array {
-        $stmt = $this->db->prepare("SELECT * FROM books WHERE title LIKE :search OR author LIKE :search");
-        $stmt->execute(['search' => '%' . $searchTerm . '%']);
+        $stmt = $this->db->prepare("SELECT * FROM books WHERE title LIKE :search OR author LIKE :search2");
+        $stmt->execute(['search' => '%' . $searchTerm . '%', 'search2' => '%' . $searchTerm . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
