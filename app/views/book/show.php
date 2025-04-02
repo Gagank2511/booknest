@@ -11,7 +11,7 @@
 <body>
     <?php include "../app/views/components/header.php"; ?>
     <main>
-
+        <button onclick="location.href='/book'">Back</button>
         <?php if (sizeof($data['book']) == 0) : ?>
             There are no books to show
 

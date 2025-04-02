@@ -10,6 +10,7 @@
     <?php include "../app/views/components/header.php"; ?>
     <main>
         <h1>Your Shopping Cart</h1>
+        <button onclick="location.href='/book'">Back</button>
         <a href="/cart/getCartItems"></a>
 
         <?php if (empty($data['books'])): ?>
@@ -36,3 +37,39 @@
 </body>
     <?php include "../app/views/components/footer.php"; ?>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cartLink = document.getElementById('cart-link');
+    const cartCount = document.getElementById('cart-count');
+
+    // Function to update cart count
+    function updateCartCount(count) {
+        cartCount.textContent = count;
+    }
+
+    // Add event listener to the add to cart form
+    const addToCartForms = document.querySelectorAll('form[action="/cart/addToCart"]');
+    addToCartForms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartCount(data.cartCount); // Update cart count dynamically
+                    alert('Item added to cart!');
+                } else {
+                    alert('Failed to add item to cart.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
