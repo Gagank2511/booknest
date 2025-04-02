@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title><?= htmlspecialchars($data['book']['title'], ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 
@@ -24,10 +24,9 @@
         <p>Price: $<?= htmlspecialchars($data['book']['price'], ENT_QUOTES, 'UTF-8') ?></p>
         
         <section id="addToCart">
-        <form action="/cart/addToCart" method="POST">
+        <form action="/cart/addToCart" method="POST" id="add-to-cart-form">
             <input type="hidden" name="bookId" value="<?= htmlspecialchars($data['book']['id'], ENT_QUOTES, 'UTF-8')?>">
-
-            <button>Add to Cart</button>
+            <button type="submit">Add to Cart</button>
         </form>
         </section>
         <h2>Leave a Review</h2>
