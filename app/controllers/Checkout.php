@@ -16,7 +16,7 @@ class Checkout extends Controller {
                 ];
             }
         }
-        $this->view('checkout/index', ['cartDetails' => $cartItems]);
+        $this->view('checkout/index', ['cartDetails' => $books]);
     }
 
     public function confirm() {
