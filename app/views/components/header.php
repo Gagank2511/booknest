@@ -5,6 +5,8 @@
         <a href="/login">Login</a>
         <a href="/book">Books</a>
         <a href="/cart">Cart</a>
+        <a href="/checkout">Checkout</a>
+
 
 
 
