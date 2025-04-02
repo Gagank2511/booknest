@@ -11,6 +11,7 @@
 <body>
     <?php include "../app/views/components/header.php"; ?>
     <main>
+        <button onclick="location.href='/home'">Back</button>
         <h1>Book Catalogue</h1>
         <form action="/book/search">
             <input type="text" name="search" placeholder="Search for books..." required>
