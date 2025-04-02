@@ -22,22 +22,9 @@ class Register extends Controller
             }
         }
 
-
-            // // Basic validation
-            // if ( empty( $name ) || empty( $email ) || empty( $password ) || empty( $confirmPassword ) ) {
-            //     $this->view( 'auth/register', [ 'error' => 'All fields are required' ] );
-            //     return;
-            // }
-
-            // if ( $password !== $confirmPassword ) {
-            //     $this->view( 'auth/register', [ 'error' => 'Passwords do not match' ] );
-            //     return;
-            // }
-
             $userModel = $this->model( 'User' );
-            $hashedPassword = password_hash( $password, PASSWORD_DEFAULT );
 
-            if ( $userModel->register( $name, $email, $hashedPassword ) ) {
+            if ( $userModel->register( $name, $email, $password ) ) {
                 session_regenerate_id( true );
                 header( 'Location: /login', true, 303 );
                 exit;
