@@ -1,4 +1,3 @@
-// app/models/Cart.php
 <?php
 class CartCollection extends Model {
     public function addToCart($bookId) {
