@@ -1,4 +1,21 @@
-/* General Styles */
+/* CSS Reset and Variables */
+:root {
+    --primary-color: #35424a;
+    --accent-color: #e8491d;
+    --text-color: #333;
+    --background-light: #f4f4f4;
+    --background-white: #ffffff;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Accessibility Improvements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -26,7 +43,7 @@ header nav a {
 }
 
 header nav a:hover {
-    background: #e8491d;
+    background-color: var(--accent-color);
 }
 
 /* Main Content */
